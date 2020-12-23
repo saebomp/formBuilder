@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
 import { Card } from 'antd'
-import RemoveContact from '../buttons/RemoveContact'
+import RemoveForm from '../buttons/RemoveForm'
 import { EditOutlined } from '@ant-design/icons'
-import UpdateContact from '../forms/UpdateContact'
+import UpdateForm from '../forms/UpdateForm'
 
 const getStyles = () => ({
   card: {
@@ -11,7 +11,7 @@ const getStyles = () => ({
   }
 })
 
-const Contact = props => {
+const Form = props => {
   const [id] = useState(props.id)
   const [firstName, setFirstName] = useState(props.firstName)
   const [lastName, setLastName] = useState(props.lastName)
@@ -44,7 +44,7 @@ const Contact = props => {
   return (
     <div>
       {editMode ? (
-        <UpdateContact
+        <UpdateForm
           id={props.id}
           firstName={props.firstName}
           lastName={props.lastName}
@@ -57,7 +57,7 @@ const Contact = props => {
         style={styles.card}
         actions={[
           <EditOutlined key='edit' onClick={handleButtonClick} />,
-          <RemoveContact id={id} firstName={firstName} lastName={lastName} />
+          <RemoveForm id={id} firstName={firstName} lastName={lastName} />
         ]}
       >
         {fullName()}
@@ -67,4 +67,4 @@ const Contact = props => {
   )
 }
 
-export default Contact
+export default Form

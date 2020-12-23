@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useQuery } from '@apollo/client'
-import Contact from '../listItems/Contact'
+import Form from '../listItems/Form'
 
 import { List } from 'antd'
 import { GET_CONTACTS } from '../../graphql/queries'
@@ -12,7 +12,7 @@ const getStyles = () =>({
   }
 })
 
-const Contacts = () => {
+const Forms = () => {
   const styles = getStyles()
 
   const {loading, error, data} = useQuery(GET_CONTACTS)
@@ -24,7 +24,7 @@ const Contacts = () => {
     <List grid={{guttuer:20, column:1}} style={styles.list}>
         {data.contacts.map(({id, firstName, lastName}) => (
           <List.Item>
-            <Contact 
+            <Form 
               key={id} id={id} firstName={firstName} lastName={lastName}  
             />
           </List.Item>  
@@ -35,7 +35,7 @@ const Contacts = () => {
 
 }
 
-export default Contacts
+export default Forms
 
 //https://www.apollographql.com/docs/react/data/queries/
 // useQuery React hooks는 아폴로 애플리케이션에서 쿼리를 실행하기 위한 기본 API이다. 리액트 구성 요소 내에서 쿼리를 실행하려면 useQuery를 호출하여 GraphQL 쿼리 문자열을 전달하십시오. 구성 요소가 렌더링되면 useQuery는 UI를 렌더링하는 데 사용할 수 있는 {loading, error, data}가 포함된 개체를 Apollo Client에서 반환한다.

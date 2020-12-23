@@ -5,7 +5,7 @@ import {filter} from 'lodash'
 import {DeleteOutlined} from '@ant-design/icons'
 import { GET_CONTACTS, REMOVE_CONTACT } from '../../graphql/queries'
 
-const RemoveContact = ({ id, firstName, lastName }) => {
+const RemoveForm = ({ id, firstName, lastName }) => {
   const [removeContact] = useMutation(REMOVE_CONTACT, {
     
     update(proxy, { data: { removeContact } }) {
@@ -51,4 +51,4 @@ const RemoveContact = ({ id, firstName, lastName }) => {
   )
 }
 
-export default RemoveContact
+export default RemoveForm

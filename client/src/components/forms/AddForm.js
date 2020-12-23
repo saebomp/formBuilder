@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { ADD_CONTACT, GET_CONTACTS } from '../../graphql/queries'
 
 
-const AddContact = () => {
+const AddForm = () => {
   const [id] = useState(uuidv4())
   const [addContact] = useMutation(ADD_CONTACT)
   //queries.js 에서 받아둔 ADD_CONTACT 값을 addContact 라는 array에 넣어둔다..? 
@@ -59,28 +59,28 @@ const AddContact = () => {
   return (
     <Form
     form={form}
-    labelCol={{ span: 4,}}
-    wrapperCol={{ span: 14,}}
     name='add-contact-form'
     // layout='horizontal'
     onFinish={onFinish}
     size='large'
     style={{ marginBottom: '40px' }}
   >
-    <Form.Item
-      label="First Name"
-      name='firstName'
-      rules={[{ required: true, message: 'Please input your first name!' }]}
-    >
-      <Input placeholder='i.e. John' />
-    </Form.Item>
-    <Form.Item
-      label="Last Name"
-      name='lastName'
-      rules={[{required:true, message:'Please input your last name!'}]}
-    >
-      <Input placeholder='i.e. Smith' />
-    </Form.Item>
+    <div className="formforname">
+      <Form.Item
+        label="First Name"
+        name='firstName'
+        rules={[{ required: true, message: 'Please input your first name!' }]}
+      >
+        <Input placeholder='i.e. John' />
+      </Form.Item>
+      <Form.Item
+        label="Last Name"
+        name='lastName'
+        rules={[{required:true, message:'Please input your last name!'}]}
+      >
+        <Input placeholder='i.e. Smith' />
+      </Form.Item>
+    </div>
     <Form.Item
       label="Address"
       name='address'
@@ -102,7 +102,7 @@ const AddContact = () => {
   )
 }
 
-export default AddContact
+export default AddForm
 
 //https://www.apollographql.com/docs/react/performance/optimistic-ui/
 
