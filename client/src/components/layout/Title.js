@@ -11,7 +11,7 @@ const getStyles = () => ({
 
 const Title = () => {
   const styles = getStyles()
-  return <h1 style={styles.title}>It's all about who know</h1>
+  return <h1 style={styles.title}>Form Builder</h1>
 }
 
 export default Title

@@ -19,6 +19,7 @@ const AddContact = () => {
     forceUpdate({})
   }, [])
 
+  
   const onFinish = values => {
     const {firstName, lastName} = values
     //onFinish :Trigger after submitting the form and verifying data successfully
@@ -54,36 +55,44 @@ const AddContact = () => {
       }
     })
   }
+  
   return (
     <Form
     form={form}
+    labelCol={{ span: 4,}}
+    wrapperCol={{ span: 14,}}
     name='add-contact-form'
-    layout='inline'
+    // layout='horizontal'
     onFinish={onFinish}
     size='large'
     style={{ marginBottom: '40px' }}
   >
     <Form.Item
+      label="First Name"
       name='firstName'
       rules={[{ required: true, message: 'Please input your first name!' }]}
     >
       <Input placeholder='i.e. John' />
     </Form.Item>
     <Form.Item
+      label="Last Name"
       name='lastName'
-      rules={[{required:true, message:'Please input your first name!'}]}
+      rules={[{required:true, message:'Please input your last name!'}]}
     >
       <Input placeholder='i.e. Smith' />
+    </Form.Item>
+    <Form.Item
+      label="Address"
+      name='address'
+      rules={[{required:true, message:'Please input your address!'}]}
+    >
+      <Input placeholder='i.e. 100 Robson street' />
     </Form.Item>
     <Form.Item shouldUpdate={true}> 
       {() => (
         <Button 
         type='primary' 
         htmlType='submit'
-        // disabled={
-        //   !form.isFieldsTouched(true) || form.getFieldError().filter(({errors})=> errors.length).length
-        //   //not both touched (input 둘다 touched 아니면) disable 됨 
-        // }
         >
           Add Contact
         </Button>
@@ -96,3 +105,5 @@ const AddContact = () => {
 export default AddContact
 
 //https://www.apollographql.com/docs/react/performance/optimistic-ui/
+
+// https://ant.design/components/form/

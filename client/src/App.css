@@ -2,12 +2,11 @@
 
 .App {
   align-items: center;
-  border: 4px solid black;
   display: flex;
   flex-direction: column;
-  margin: 100px auto;
+  margin: 0px auto;
   padding: 40px;
-  width: 70%;
+  width: 80%;
 }
 
 .App-logo {
