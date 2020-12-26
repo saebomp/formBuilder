@@ -1,16 +1,65 @@
 @import '~antd/dist/antd.css'; 
 
+body {
+  background-color: #efefef;
+  margin: 0;
+  padding:0;
+}
 .App {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0px auto;
+  margin: 30px auto;
   width: 80%;
+  background-color: #fff;
+  padding:15px 40px;
+  border-radius: 2px;
+  position: relative;
 }
+
+.App::before,
+.App::after {
+  content: '';
+  position: absolute;
+  bottom: 13px;
+  width: 40%;
+  height: 10px;
+  box-shadow: 0 5px 14px rgba(0,0,0,.7);
+  z-index: -1;
+  transition: all .3s ease-in-out;
+}
+
+.App::before {
+  left: 15px;
+  transform: skew(-5deg) rotate(-5deg);
+}
+
+.App::after {
+  right: 15px;
+  transform: skew(5deg) rotate(5deg);
+}
+
+.App:hover::before,
+.App:hover::after {
+  box-shadow: 0 2px 14px rgba(0,0,0,.4);
+}
+
+.App:hover::before {
+  left: 5px;
+}
+
+.App:hover::after {
+  right: 5px;
+}
+
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.ant-spin-nested-loading {
+  width:100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -40,7 +89,8 @@
 }
 
 .ant-form-item-label {
-  width:100px
+  width:100px;
+  text-align: left;
 }
 
 .ant-form-item-control-input-content {

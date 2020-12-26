@@ -7,7 +7,7 @@ import UpdateForm from '../forms/UpdateForm'
 
 const getStyles = () => ({
   card: {
-    width: '500px'
+    // width: '500px'
   }
 })
 

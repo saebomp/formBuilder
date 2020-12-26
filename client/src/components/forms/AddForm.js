@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Select, Row, Col } from 'antd'
 
 import { v4 as uuidv4 } from 'uuid'
 import { ADD_CONTACT, GET_CONTACTS } from '../../graphql/queries'
@@ -65,36 +65,68 @@ const AddForm = () => {
     size='large'
     style={{ marginBottom: '40px' }}
   >
-    <div className="formforname">
-      <Form.Item
-        label="First Name"
-        name='firstName'
-        rules={[{ required: true, message: 'Please input your first name!' }]}
-      >
-        <Input placeholder='i.e. John' />
-      </Form.Item>
-      <Form.Item
-        label="Last Name"
-        name='lastName'
-        rules={[{required:true, message:'Please input your last name!'}]}
-      >
-        <Input placeholder='i.e. Smith' />
-      </Form.Item>
-    </div>
+    <Row gutter={[16,0]}>
+      <Col span={12}>
+        <Form.Item
+          label="First Name"
+          name='firstName'
+          // rules={[{ required: true, message: 'Please input your first name!' }]}
+        >
+          <Input placeholder='i.e. John' />
+        </Form.Item>
+      </Col>
+      <Col span={12}>
+        <Form.Item
+          label="Last Name"
+          name='lastName'
+          // rules={[{required:true, message:'Please input your last name!'}]}
+        >
+          <Input placeholder='i.e. Smith' />
+        </Form.Item>
+      </Col>
+    </Row>
+    <Row gutter={[16,0]}>
+      <Col span={12}>
+        <Form.Item
+          label="Address"
+          name='address'
+          // rules={[{required:true, message:'Please input your address!'}]}
+        >
+          <Input placeholder='i.e. 100 Robson street' />
+        </Form.Item>
+      </Col>
+      <Col span={12}>
+        <Form.Item
+          label="Postal Codes"
+          name='postalcodes'
+          // rules={[{required:true, message:'Please input your postal codes!'}]}
+        >
+          <Input placeholder='i.e. 100 A0BC1D' />
+        </Form.Item>
+      </Col>
+    </Row>
     <Form.Item
-      label="Address"
-      name='address'
-      rules={[{required:true, message:'Please input your address!'}]}
+      label="Email"
+      name='email'
+      // rules={[{required:true, message:'Please input your address!'}]}
     >
-      <Input placeholder='i.e. 100 Robson street' />
+      <Input placeholder='i.e. abcd@gmail.com' />
     </Form.Item>
-    <Form.Item shouldUpdate={true}> 
+    <Form.Item label="Gender">
+      <Select>
+        <Select.Option value="male">Male</Select.Option>
+        <Select.Option value="female">Female</Select.Option>
+        <Select.Option value="other">Other</Select.Option>
+      </Select>
+    </Form.Item>
+    <Form.Item shouldUpdate={true} style={{textAlign:'center'}}> 
       {() => (
         <Button 
         type='primary' 
         htmlType='submit'
+        style={{width:'100%'}}
         >
-          Add Contact
+          Submit
         </Button>
       )}
     </Form.Item>
