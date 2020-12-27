@@ -71,7 +71,7 @@ const AddForm = () => {
         <Form.Item
           label="First Name"
           name='firstName'
-          // rules={[{ required: true, message: 'Please input your first name!' }]}
+          rules={[{ required: true, message: 'Please input your first name!' }]}
         >
           <Input placeholder='i.e. John' />
         </Form.Item>
@@ -80,7 +80,7 @@ const AddForm = () => {
         <Form.Item
           label="Last Name"
           name='lastName'
-          // rules={[{required:true, message:'Please input your last name!'}]}
+          rules={[{required:true, message:'Please input your last name!'}]}
         >
           <Input placeholder='i.e. Smith' />
         </Form.Item>
@@ -91,7 +91,7 @@ const AddForm = () => {
         <Form.Item
           label="Address"
           name='address'
-          // rules={[{required:true, message:'Please input your address!'}]}
+          rules={[{required:true, message:'Please input your address!'}]}
         >
           <Input placeholder='i.e. 100 Robson street' />
         </Form.Item>
@@ -100,7 +100,7 @@ const AddForm = () => {
         <Form.Item
           label="Postal Codes"
           name='postal'
-          // rules={[{required:true, message:'Please input your postal codes!'}]}
+          rules={[{required:true, message:'Please input your postal codes!'}]}
         >
           <Input placeholder='i.e. A0BC1D' />
         </Form.Item>
@@ -109,7 +109,7 @@ const AddForm = () => {
     <Form.Item
       label="Email"
       name='email'
-      // rules={[{required:true, message:'Please input your address!'}]}
+      rules={[{required:true, message:'Please input your address!'}]}
     >
       <Input placeholder='i.e. abcd@gmail.com' />
     </Form.Item>
@@ -126,6 +126,14 @@ const AddForm = () => {
         type='primary' 
         htmlType='submit'
         style={{width:'100%'}}
+        disabled={
+          (!form.isFieldTouched('firstName') &&
+            !form.isFieldTouched('lastName')) &&
+            !form.isFieldsTouched('address') &&
+            !form.isFieldsTouched('postal') &&
+            !form.isFieldTouched('email') ||
+          form.getFieldsError().filter(({ errors }) => errors.length).length
+        }
         >
           Submit
         </Button>
