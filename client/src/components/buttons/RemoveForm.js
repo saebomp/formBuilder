@@ -5,7 +5,7 @@ import {filter} from 'lodash'
 import {DeleteOutlined} from '@ant-design/icons'
 import { GET_CONTACTS, REMOVE_CONTACT } from '../../graphql/queries'
 
-const RemoveForm = ({ id, firstName, lastName }) => {
+const RemoveForm = ({ id, firstName, lastName, address, postal, email}) => {
   const [removeContact] = useMutation(REMOVE_CONTACT, {
     
     update(proxy, { data: { removeContact } }) {
@@ -16,7 +16,6 @@ const RemoveForm = ({ id, firstName, lastName }) => {
           contacts: filter(contacts, c => {
             return c.id !== removeContact.id
           })
-          //내가 삭제한거 빼고 다 리턴하라는 뜻
         }
       })
     }
@@ -30,13 +29,16 @@ const RemoveForm = ({ id, firstName, lastName }) => {
           id
         },
         optimisticResponse:{
-          __typename:'Mutation',   //query type 확인
+          __typename:'Mutation',  
   
-          removeContact:{ //mutation 이름
-            __typename:'Contact',  //받을 오브젝트 타입-> single contact
+          removeContact:{ 
+            __typename:'Contact',  
             id,
             firstName,
-            lastName
+            lastName,
+            address,
+            postal,
+            email
           }
         }
       })

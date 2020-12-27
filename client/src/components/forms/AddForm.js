@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { Form, Input, Button, Select, Row, Col } from 'antd'
+import { Form, Input, Button, Row, Col } from 'antd'
 
 import { v4 as uuidv4 } from 'uuid'
 import { ADD_CONTACT, GET_CONTACTS } from '../../graphql/queries'
@@ -9,11 +9,9 @@ import { ADD_CONTACT, GET_CONTACTS } from '../../graphql/queries'
 const AddForm = () => {
   const [id] = useState(uuidv4())
   const [addContact] = useMutation(ADD_CONTACT)
-  //queries.js 에서 받아둔 ADD_CONTACT 값을 addContact 라는 array에 넣어둔다..? 
 
   const [form] = Form.useForm()
   const [, forceUpdate] = useState()
-  //forceUpdate 는 method 호출을 통해 리액트에게 해당 컴퍼넌트가 업데이트됐으니 다시 렌더링하라고 알려줌
 
   useEffect(() => {
     forceUpdate({})
@@ -21,29 +19,32 @@ const AddForm = () => {
 
   
   const onFinish = values => {
-    const {firstName, lastName} = values
-    //onFinish :Trigger after submitting the form and verifying data successfully
+    const {firstName, lastName, address, postal, email} = values
 
     addContact({
       variables: {
         id,
         firstName,
-        lastName
+        lastName,
+        address,
+        postal,
+        email
       },
-      //새로운 연락처 추가할때 새로고침 안해도 바로 업데이트 되는부분
       optimisticResponse:{
-        __typename:'Mutation',   //query type 확인
+        __typename:'Mutation',   
 
-        addContact:{ //mutation 이름
-          __typename:'Contact',  //받을 오브젝트 타입-> single contact
+        addContact:{
+          __typename:'Contact', 
           id,
           firstName,
-          lastName
+          lastName,
+          address,
+          postal,
+          email
         }
       },
       update:(proxy, {data: { addContact } }) => {  
-        //proxy는 readQuery 와 writeQuery 라는 method 에 access할수있게 해줌
-        //data:{addContact}}    data를 distructoring 하고 onFinish 안에있는 addContact 부름
+       
         const data = proxy.readQuery({ query:GET_CONTACTS})
         proxy.writeQuery({
           query:GET_CONTACTS,
@@ -98,10 +99,10 @@ const AddForm = () => {
       <Col span={12}>
         <Form.Item
           label="Postal Codes"
-          name='postalcodes'
+          name='postal'
           // rules={[{required:true, message:'Please input your postal codes!'}]}
         >
-          <Input placeholder='i.e. 100 A0BC1D' />
+          <Input placeholder='i.e. A0BC1D' />
         </Form.Item>
       </Col>
     </Row>
@@ -112,13 +113,13 @@ const AddForm = () => {
     >
       <Input placeholder='i.e. abcd@gmail.com' />
     </Form.Item>
-    <Form.Item label="Gender">
+    {/* <Form.Item label="Gender">
       <Select>
         <Select.Option value="male">Male</Select.Option>
         <Select.Option value="female">Female</Select.Option>
         <Select.Option value="other">Other</Select.Option>
       </Select>
-    </Form.Item>
+    </Form.Item> */}
     <Form.Item shouldUpdate={true} style={{textAlign:'center'}}> 
       {() => (
         <Button 
@@ -136,6 +137,3 @@ const AddForm = () => {
 
 export default AddForm
 
-//https://www.apollographql.com/docs/react/performance/optimistic-ui/
-
-// https://ant.design/components/form/

@@ -15,6 +15,9 @@ const Form = props => {
   const [id] = useState(props.id)
   const [firstName, setFirstName] = useState(props.firstName)
   const [lastName, setLastName] = useState(props.lastName)
+  const [address, setAddress] = useState(props.address)
+  const [postal, setPostal] = useState(props.postal)
+  const [email, setEmail] = useState(props.email)
   const [editMode, setEditMode] = useState(false)
   const styles = getStyles()
 
@@ -26,8 +29,6 @@ const Form = props => {
     return `${props.firstName} ${props.lastName}`
   }
 
-  //Contatc.js 에서 받은 props로 fullname return 함
-
   const updateStateVariable = (variable, value) => {
     switch (variable) {
       case 'firstName':
@@ -35,6 +36,15 @@ const Form = props => {
         break
       case 'lastName':
         setLastName(value)
+        break
+      case 'address':
+        setAddress(value)
+        break
+      case 'postal':
+        setPostal(value)
+        break
+      case 'email':
+        setEmail(value)
         break
       default:
         break
@@ -48,6 +58,9 @@ const Form = props => {
           id={props.id}
           firstName={props.firstName}
           lastName={props.lastName}
+          address={props.address}
+          postal={props.postal}
+          email={props.email}
           onButtonClick={handleButtonClick}
           updateStateVariable={updateStateVariable}
         />
@@ -57,7 +70,13 @@ const Form = props => {
         style={styles.card}
         actions={[
           <EditOutlined key='edit' onClick={handleButtonClick} />,
-          <RemoveForm id={id} firstName={firstName} lastName={lastName} />
+          <RemoveForm 
+            id={id} 
+            firstName={firstName} 
+            lastName={lastName} 
+            address={address} 
+            postal={postal} 
+            email={email} />
         ]}
       >
         {fullName()}
